@@ -1,2 +1,2 @@
 # ProgettoCambiamentiClimatici
-Repository per il progetto Cambiamenti Climatici :P
+Repository per il progetto videogioco Cambiamenti Climatici :P
