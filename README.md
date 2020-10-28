@@ -1,4 +1,2 @@
 # ProgettoCambiamentiClimatici
-Repository per il progetto Cambiamenti Climatici
-
-Prova modifica :P
+Repository per il progetto Cambiamenti Climatici :P
