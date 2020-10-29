@@ -2296,7 +2296,7 @@ GameObject:
   - component: {fileID: 1058246948}
   - component: {fileID: 1058246947}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MouseClickManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
