@@ -49,7 +49,10 @@ public class BoardManager : MonoBehaviour
     public Dictionary<TileBase, TileData> dataFromTiles;
 
     public float timeBetweenWaves = 1f;
-    private float timeToSpawn = 2f;
+    private float timeToSpawn = 3f;
+
+    [SerializeField]
+    private FireManager fireManager;
 
     // Update is called once per frame
     void Update()
@@ -68,6 +71,43 @@ public class BoardManager : MonoBehaviour
             Vector3 pos = gridPositions[index];
             Vector3Int gridPosition = tilemap.WorldToCell(pos);
             //print("index: "+index+" tile grid pos: "+ gridPosition);
+            TileData data = GetTileData(gridPosition);
+            if (data != null && data.canBurn)
+            {
+                //print(data);
+
+                switch (data.type)
+                {
+                    case "green":
+                        if (Random.Range(0f, 100f) <= data.growingChance)
+                        {
+                            tilemap.SetTile(gridPosition, flowerTile);
+                        }
+                        else if (Random.Range(0f, 100f) <= data.erosionChance)
+                        {
+                            tilemap.SetTile(gridPosition, brownTile);
+                        }
+                        break;
+                    case "flower":
+                        if (Random.Range(0f, 100f) <= data.erosionChance)
+                        {
+                            tilemap.SetTile(gridPosition, greenTile);
+                        }
+                        break;
+                    case "brown":
+                        if (Random.Range(0f, 100f) <= data.erosionChance)
+                        {
+                            //start a fire
+                            fireManager.SetTileOnFire(gridPosition, data);
+                        }
+                        break;
+                    case "black":
+                        break;
+                }
+                    
+
+                
+            }
         }
     }
 
@@ -164,9 +204,9 @@ public class BoardManager : MonoBehaviour
         InitialiseList();
 
         //Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-        LayoutTilesAtRandom(flowerTiles, flowerTile, flowerCount.minimum, flowerCount.maximum);
+        //LayoutTilesAtRandom(flowerTiles, flowerTile, flowerCount.minimum, flowerCount.maximum);
 
-        LayoutTilesAtRandom(brownTiles, brownTile, brownCount.minimum, brownCount.maximum);
+        //LayoutTilesAtRandom(brownTiles, brownTile, brownCount.minimum, brownCount.maximum);
 
         //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
         //LayoutObjectAtRandom(foodTiles, garbageCount.minimum, garbageCount.maximum);
@@ -210,7 +250,7 @@ public class BoardManager : MonoBehaviour
             return dataFromTiles[tile];
     }
 
-    public TileData GetTileData(Vector2 worldPosition)
+    public TileData GetTileData(Vector3 worldPosition)
     {
         Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
 
@@ -220,5 +260,11 @@ public class BoardManager : MonoBehaviour
             return null;
         else
             return dataFromTiles[tile];
+    }
+
+    public void SetGreenTileData(Vector3 position)
+    {
+        Vector3Int tilePos = tilemap.WorldToCell(position);
+        tilemap.SetTile(tilePos, greenTile);
     }
 }

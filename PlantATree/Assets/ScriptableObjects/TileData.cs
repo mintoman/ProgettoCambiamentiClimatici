@@ -12,5 +12,10 @@ public class TileData : ScriptableObject
 
     public bool canBurn;
 
+    public bool canGrow;
+
+    public float growingChance;
+    public float erosionChance;
+
     public float spreadChance, spreadInterval, burnTime;
 }

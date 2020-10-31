@@ -58,7 +58,7 @@ public class FireManager : MonoBehaviour
         }
     }
 
-    private void SetTileOnFire(Vector3Int tilePosition, TileData data)
+    public void SetTileOnFire(Vector3Int tilePosition, TileData data)
     {
         Fire newFire = Instantiate(firePrefab);
         newFire.transform.position = map.GetCellCenterWorld(tilePosition);

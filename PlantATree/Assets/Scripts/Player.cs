@@ -20,9 +20,4 @@ public class Player : MonoBehaviour
             //Destroy(coll.gameObject);
         }
     }
-
-    /*void OnCollisionEnter2D(Collision2D coll)
-    {
-        Debug.Log("Collider??????????");
-    }*/
 }

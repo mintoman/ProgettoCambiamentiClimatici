@@ -396,6 +396,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 378d450c48ad340c8b18587eda891356, type: 2}
   - {fileID: 11400000, guid: 9a8331ca26fe7409a87cc204a4d9b06e, type: 2}
   timeBetweenWaves: 1
+  fireManager: {fileID: 144300896}
 --- !u!4 &666983542
 Transform:
   m_ObjectHideFlags: 0

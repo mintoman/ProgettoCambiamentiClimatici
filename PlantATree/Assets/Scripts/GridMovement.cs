@@ -15,23 +15,36 @@ public class GridMovement : MonoBehaviour
     private Vector3 targetPos;
     public float timeToMove = 0.25f;
 
+    [SerializeField]
+    private float refireRate = 2f;
+    private float fireTimer = 0;
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.W) && !isMoving)
             StartCoroutine(MovePlayer(Vector3.up));
 
-        if (Input.GetKey(KeyCode.A) && !isMoving)
+        else if (Input.GetKey(KeyCode.A) && !isMoving)
             StartCoroutine(MovePlayer(Vector3.left));
 
-        if (Input.GetKey(KeyCode.S) && !isMoving)
+        else if (Input.GetKey(KeyCode.S) && !isMoving)
             StartCoroutine(MovePlayer(Vector3.down));
 
-        if (Input.GetKey(KeyCode.D) && !isMoving)
+        else if (Input.GetKey(KeyCode.D) && !isMoving)
             StartCoroutine(MovePlayer(Vector3.right));
 
-        if (Input.GetKey(KeyCode.K) && !isMoving)
-            PlantSeed();
+        fireTimer += Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.K) && !isMoving && boardManager.GetTileData(transform.position).type == "brown")
+        {
+            if (fireTimer >= refireRate)
+            {
+                fireTimer = 0;
+                PlantSeed();
+            }
+        }
+            
     }
    
     private IEnumerator MovePlayer(Vector3 direction)
@@ -71,5 +84,6 @@ public class GridMovement : MonoBehaviour
     private void PlantSeed()
     {
         print("SEME");
+        boardManager.SetGreenTileData(transform.position);
     }
 }

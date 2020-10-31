@@ -16,6 +16,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5259d63d41a5946778f5637308ca4191, type: 2}
   type: flower
   canBurn: 1
+  canGrow: 0
+  growingChance: 0
+  erosionChance: 5
   spreadChance: 5
   spreadInterval: 2
   burnTime: 2

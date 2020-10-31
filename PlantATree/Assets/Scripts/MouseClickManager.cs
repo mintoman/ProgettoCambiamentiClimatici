@@ -48,6 +48,18 @@ public class MouseClickManager : MonoBehaviour
         }
     }
 
+    public TileBase GetTile(Vector2 worldPosition)
+    {
+        Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
+
+        TileBase tile = tilemap.GetTile(gridPosition);
+
+        if (tile == null)
+            return null;
+        else
+            return tile;
+    }
+
     public string GetTileType(Vector2 worldPosition)
     {
         Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);

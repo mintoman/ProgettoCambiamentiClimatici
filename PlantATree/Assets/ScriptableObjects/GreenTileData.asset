@@ -16,6 +16,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14d9994e03a3e4716ac9b7d660aa5c64, type: 2}
   type: green
   canBurn: 1
+  canGrow: 1
+  growingChance: 5
+  erosionChance: 10
   spreadChance: 5
   spreadInterval: 2
   burnTime: 2
