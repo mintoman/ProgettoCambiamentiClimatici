@@ -39,26 +39,27 @@ public class MouseClickManager : MonoBehaviour
 
             if (clickedTile != null)
             {
-                float walkingSpeed = dataFromTiles[clickedTile].walkingSpeed;
+                string tiletype = dataFromTiles[clickedTile].type;
                 print("At position: " + gridPosition + " clickedTile " + clickedTile);
-                print("Walking Speed: " + walkingSpeed + " on clickedTile " + clickedTile);
+                print("tile type: " + tiletype + " on clickedTile " + clickedTile);
             }
 
             tilemap.SetTile(gridPosition, blackTile);
         }
     }
 
-    public float GetTileWalkingSpeed(Vector2 worldPosition)
+    public string GetTileType(Vector2 worldPosition)
     {
         Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
 
         TileBase tile = tilemap.GetTile(gridPosition);
 
         if (tile == null)
-            return 1f;
+            return "null";
 
-        float walkingSpeed = dataFromTiles[tile].walkingSpeed;
+        string tiletype = dataFromTiles[tile].type;
 
-        return walkingSpeed;
+        return tiletype;
     }
+
 }

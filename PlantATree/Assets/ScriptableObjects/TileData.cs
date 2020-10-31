@@ -8,6 +8,9 @@ public class TileData : ScriptableObject
 {
     public TileBase[] tiles;
 
-    public float walkingSpeed = 0;
+    public string type = "";
 
+    public bool canBurn;
+
+    public float spreadChance, spreadInterval, burnTime;
 }

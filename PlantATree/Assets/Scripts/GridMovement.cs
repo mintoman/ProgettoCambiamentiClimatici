@@ -2,10 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GridMovement : MonoBehaviour
 {
-    
+    public Tilemap tilemap;
+
+    [SerializeField]
+    private TileBase currentTile;
+    [SerializeField]
+    Vector3Int gridPosition;
+
     private bool isMoving;
     private Vector3 originPos;
     private Vector3 targetPos;
@@ -39,6 +46,9 @@ public class GridMovement : MonoBehaviour
         while(elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(originPos, targetPos, (elapsedTime / timeToMove));
+
+            UpdateMapPosition();
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -46,5 +56,16 @@ public class GridMovement : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+    }
+
+    private void UpdateMapPosition()
+    {
+        gridPosition = tilemap.WorldToCell(transform.position);
+        currentTile = tilemap.GetTile(gridPosition);
+    }
+
+    void Start()
+    {
+        UpdateMapPosition();
     }
 }

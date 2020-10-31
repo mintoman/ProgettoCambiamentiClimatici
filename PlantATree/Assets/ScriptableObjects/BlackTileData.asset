@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles:
   - {fileID: 11400000, guid: 01cbadb5eba2842a0bca5cc9754f2d15, type: 2}
-  walkingSpeed: 0
+  type: black
+  canBurn: 0
+  spreadChance: 100
+  spreadInterval: 0
+  burnTime: 0
