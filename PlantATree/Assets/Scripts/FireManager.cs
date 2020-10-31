@@ -71,7 +71,7 @@ public class FireManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPosition = map.WorldToCell(mousePosition);
@@ -81,6 +81,6 @@ public class FireManager : MonoBehaviour
             {
                 SetTileOnFire(gridPosition, data);
             }
-        }
+        }*/
     }
 }

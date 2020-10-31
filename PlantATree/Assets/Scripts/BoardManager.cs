@@ -28,7 +28,6 @@ public class BoardManager : MonoBehaviour
     public Count flowerCount = new Count(5, 10);                        //Lower and upper limit for our random number of seeds per level.
     public Count brownCount = new Count(1, 3);                        //Lower and upper limit for our random number of garbage items per level.
 
-    private Transform boardHolder;                                    //A variable to store a reference to the transform of our Board object.
     private List<Vector3> gridPositions = new List<Vector3>();    //A list of possible locations to place tiles.
 
     public Tilemap tilemap;
@@ -48,6 +47,29 @@ public class BoardManager : MonoBehaviour
     private List<TileData> tileDatas;
 
     public Dictionary<TileBase, TileData> dataFromTiles;
+
+    public float timeBetweenWaves = 1f;
+    private float timeToSpawn = 2f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Time.time >= timeToSpawn)
+        {
+            CheckBoard();
+            timeToSpawn = Time.time + timeBetweenWaves;
+        }
+    }
+
+    private void CheckBoard()
+    {
+        for (int index = 0; index < gridPositions.Count; index++)
+        {
+            Vector3 pos = gridPositions[index];
+            Vector3Int gridPosition = tilemap.WorldToCell(pos);
+            //print("index: "+index+" tile grid pos: "+ gridPosition);
+        }
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -166,15 +188,33 @@ public class BoardManager : MonoBehaviour
         //print("tilemap bounds: " + tilemap.size);
     }
 
-    // Update is called once per frame
-    void Update()
+    public TileBase GetTile(Vector2 worldPosition)
     {
-        
+        Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
+
+        TileBase tile = tilemap.GetTile(gridPosition);
+
+        if (tile == null)
+            return null;
+        else
+            return tile;
     }
 
     public TileData GetTileData(Vector3Int tilePosition)
     {
         TileBase tile = tilemap.GetTile(tilePosition);
+
+        if (tile == null)
+            return null;
+        else
+            return dataFromTiles[tile];
+    }
+
+    public TileData GetTileData(Vector2 worldPosition)
+    {
+        Vector3Int gridPosition = tilemap.WorldToCell(worldPosition);
+
+        TileBase tile = tilemap.GetTile(gridPosition);
 
         if (tile == null)
             return null;

@@ -8,10 +8,7 @@ public class GridMovement : MonoBehaviour
 {
     public Tilemap tilemap;
 
-    [SerializeField]
-    private TileBase currentTile;
-    [SerializeField]
-    Vector3Int gridPosition;
+    public BoardManager boardManager;
 
     private bool isMoving;
     private Vector3 originPos;
@@ -32,6 +29,9 @@ public class GridMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) && !isMoving)
             StartCoroutine(MovePlayer(Vector3.right));
+
+        if (Input.GetKey(KeyCode.K) && !isMoving)
+            PlantSeed();
     }
    
     private IEnumerator MovePlayer(Vector3 direction)
@@ -47,7 +47,7 @@ public class GridMovement : MonoBehaviour
         {
             transform.position = Vector3.Lerp(originPos, targetPos, (elapsedTime / timeToMove));
 
-            UpdateMapPosition();
+           UpdateMapPosition();
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -60,12 +60,16 @@ public class GridMovement : MonoBehaviour
 
     private void UpdateMapPosition()
     {
-        gridPosition = tilemap.WorldToCell(transform.position);
-        currentTile = tilemap.GetTile(gridPosition);
+        //this.GetTileData(transform.position);
     }
 
-    void Start()
+    private void GetTileData(Vector3 position)
     {
-        UpdateMapPosition();
+        //print("can burn:"+boardManager.GetTileData(position).canBurn);
+    }
+
+    private void PlantSeed()
+    {
+        print("SEME");
     }
 }
