@@ -18,7 +18,7 @@ MonoBehaviour:
   canBurn: 1
   canGrow: 0
   growingChance: 0
-  erosionChance: 5
+  erosionChance: 1
   spreadChance: 5
   spreadInterval: 2
   burnTime: 2
