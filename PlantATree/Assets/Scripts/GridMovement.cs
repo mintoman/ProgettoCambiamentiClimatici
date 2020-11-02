@@ -11,9 +11,7 @@ public class GridMovement : MonoBehaviour
     public BoardManager boardManager;
 
     private bool isMoving;
-    private Vector3 originPos;
-    private Vector3 targetPos;
-    public float timeToMove = 0.25f;
+    //public float timeToMove = 0.25f;
 
     [SerializeField]
     private float plantSeedRate = 1f;
@@ -37,7 +35,6 @@ public class GridMovement : MonoBehaviour
     void Update()
     {
 
-
         if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
         {
             isMoving = false;
@@ -45,7 +42,8 @@ public class GridMovement : MonoBehaviour
             animator.SetFloat("Horizontal", 0f);
             animator.SetFloat("Vertical", 0f);
         }
-            
+
+        //Movement
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMoving)
         {
             if (plantSeedTimer >= plantSeedRate)
@@ -68,26 +66,8 @@ public class GridMovement : MonoBehaviour
                 isMoving = true;
             }
         }
-        
 
-        //old move code
-        /*if (Input.GetKey(KeyCode.W) && !isMoving)
-        {
-            StartCoroutine(MovePlayer(Vector3.up));
-        }
-        else if (Input.GetKey(KeyCode.A) && !isMoving)
-        {
-            StartCoroutine(MovePlayer(Vector3.left));
-        }
-        else if (Input.GetKey(KeyCode.S) && !isMoving)
-        {
-            StartCoroutine(MovePlayer(Vector3.down));
-        }
-        else if (Input.GetKey(KeyCode.D) && !isMoving)
-        {
-            StartCoroutine(MovePlayer(Vector3.right));
-        }*/    
-
+        //Plant Seed
         plantSeedTimer += Time.deltaTime;
         
         if (Input.GetKey(KeyCode.K) && !isMoving)
@@ -101,7 +81,6 @@ public class GridMovement : MonoBehaviour
             if (plantSeedTimer >= plantSeedRate)
             {
                 plantSeedTimer = 0;
-                isPlanting = true;
                 PlantSeed();
             }
         }
@@ -111,43 +90,19 @@ public class GridMovement : MonoBehaviour
             {
                 boardManager.SetGreenTileData(transform.position);
                 isPlanting = false;
-                animator.SetBool("isPlantingSeed", false);
+                animator.SetBool("isPlantingSeed", isPlanting);
             }    
-        }
-       
+        } 
     }
 
     void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
     }
-   
-    private IEnumerator MovePlayer(Vector3 direction)
-    {
-        isMoving = true;
-
-        float elapsedTime = 0;
-
-        originPos = transform.position;
-        targetPos = originPos + direction;
-
-        while(elapsedTime < timeToMove)
-        {
-            transform.position = Vector3.Lerp(originPos, targetPos, (elapsedTime / timeToMove));
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
-
-        isMoving = false;
-    }
 
     private void PlantSeed()
     {
-        animator.SetBool("isPlantingSeed", true);
-        //print("SEME");
-        
+        isPlanting = true;
+        animator.SetBool("isPlantingSeed", isPlanting);
     }
 }
