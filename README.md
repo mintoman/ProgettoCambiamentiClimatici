@@ -1,5 +1,6 @@
 # ProgettoCambiamentiClimatici
-Repository per il progetto videogioco Cambiamenti Climatici realizzato con Unity. Progetto svolto con i ragazzi del Liceo Scientifico Brotzu Quartu.
+Repository per il progetto videogioco Cambiamenti Climatici realizzato con Unity. 
+Progetto svolto con i ragazzi del Liceo Scientifico Brotzu Quartu.
 
 Il Player cammina e pianta semi nel terreno, è animato tramite Blend Tree.
 
