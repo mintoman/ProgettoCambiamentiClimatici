@@ -91,8 +91,14 @@ public class GridMovement : MonoBehaviour
 
         plantSeedTimer += Time.deltaTime;
         
-        if (Input.GetKey(KeyCode.K) && !isMoving && boardManager.GetTileData(transform.position).type == "brown")
+        if (Input.GetKey(KeyCode.K) && !isMoving)
         {
+            TileData tileData = boardManager.GetTileData(transform.position);
+            if (tileData == null) return;
+
+            string tileType = tileData.type;
+            if (tileType != "brown") return;
+
             if (plantSeedTimer >= plantSeedRate)
             {
                 plantSeedTimer = 0;
