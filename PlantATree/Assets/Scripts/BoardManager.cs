@@ -7,26 +7,9 @@ using UnityEngine.Tilemaps;
 
 public class BoardManager : MonoBehaviour
 {
-    /*[Serializable]
-    public class Count
-    {
-        public int minimum;             //Minimum value for our Count class.
-        public int maximum;             //Maximum value for our Count class.
-
-
-        //Assignment constructor.
-        public Count(int min, int max)
-        {
-            minimum = min;
-            maximum = max;
-        }
-    }*/
-    //public Count flowerCount = new Count(5, 10);                        //Lower and upper limit for our random number of seeds per level.
-    //public Count brownCount = new Count(1, 3);                        //Lower and upper limit for our random number of garbage items per level.
-
     public int columns = 12;                                         //Number of columns in our game board.
     public int rows = 10;                                            //Number of rows in our game board.
-    
+
     private List<Vector3> gridPositions = new List<Vector3>();    //A list of possible locations to place tiles.
 
     public Tilemap tilemap;
@@ -136,13 +119,12 @@ public class BoardManager : MonoBehaviour
     {
         //Clear our list gridPositions.
         gridPositions.Clear();
-        Debug.Log("x -> " +(-9 + tilemap.size.x - 1));
-        Debug.Log("y -> " + (-5 + tilemap.size.y - 5));
+        
         //Loop through x axis (columns).
         for (int x = -9; x < -9 + tilemap.size.x - 1; x++)
         {
             //Within each column, loop through y axis (rows).
-            for (int y = -5; y < -5 + tilemap.size.y - 5; y++)
+            for (int y = -5; y <= -5 + tilemap.size.y - 4; y++)
             {
                 //At each index add a new Vector3 to our list with the x and y coordinates of that position.
                 gridPositions.Add(new Vector3(x, y, 0f));
