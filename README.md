@@ -1,5 +1,5 @@
 # ProgettoCambiamentiClimatici
-Repository per il progetto videogioco Cambiamenti Climatici realizzato con Unity. 
+Repository per il progetto videogioco Cambiamenti Climatici, realizzato con Unity. 
 
 Progetto svolto con i ragazzi del Liceo Scientifico Brotzu Quartu.
 
