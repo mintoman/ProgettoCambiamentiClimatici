@@ -61,15 +61,16 @@ public class FireManager : MonoBehaviour
     public void SetTileOnFire(Vector3Int tilePosition, TileData data)
     {
         //Fire newFire = Instantiate(firePrefab);
-        GameObject newFire = ObjectPoolerUpgraded.Instance.SpawnFromPool("Fire", tilePosition, Quaternion.identity);
-        newFire.transform.position = map.GetCellCenterWorld(tilePosition);
+        GameObject newFire = ObjectPoolerUpgraded.Instance.SpawnFromPool("Fire", new Vector3(0f,0f,0f), Quaternion.identity);
+        
         //newFire.StartBurning(tilePosition, data, this);
+        IPooledObject pooledObject = newFire.GetComponent<IPooledObject>();
+        pooledObject.OnObjectSpawnBurn(tilePosition, data, this);
+
+        newFire.transform.position = map.GetCellCenterWorld(tilePosition);
         map.SetTile(tilePosition, blackTile);
 
         activeFires.Add(tilePosition);
-
-        IPooledObject pooledObject = newFire.GetComponent<IPooledObject>();
-        pooledObject.OnObjectSpawnBurn(tilePosition, data, this);
     }
 
     // Update is called once per frame

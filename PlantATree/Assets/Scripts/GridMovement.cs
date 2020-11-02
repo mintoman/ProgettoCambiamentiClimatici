@@ -24,8 +24,11 @@ public class GridMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
 
+    private bool isPlanting;
+
     void Start()
     {
+        isPlanting = false;
         animator.SetBool("isPlantingSeed", false);
         movePoint.parent = null;
     }
@@ -98,13 +101,18 @@ public class GridMovement : MonoBehaviour
             if (plantSeedTimer >= plantSeedRate)
             {
                 plantSeedTimer = 0;
+                isPlanting = true;
                 PlantSeed();
             }
         }
         else
         {
-            if (plantSeedTimer >= plantSeedRate)
+            if (plantSeedTimer >= plantSeedRate && isPlanting)
+            {
+                boardManager.SetGreenTileData(transform.position);
+                isPlanting = false;
                 animator.SetBool("isPlantingSeed", false);
+            }    
         }
        
     }
@@ -140,6 +148,6 @@ public class GridMovement : MonoBehaviour
     {
         animator.SetBool("isPlantingSeed", true);
         //print("SEME");
-        boardManager.SetGreenTileData(transform.position);
+        
     }
 }
