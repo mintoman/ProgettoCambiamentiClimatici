@@ -72,8 +72,6 @@ public class GarbageManager : MonoBehaviour
         pooledObject.OnObjectSpawn(tilePosition, this);
         //newGarbage.SetOnMap(tilePosition, this);
 
-        //MusicManager.Instance.PlaySingle(powerUpSound);
-
         garbageOnMap.Add(tilePosition);
     }
 }

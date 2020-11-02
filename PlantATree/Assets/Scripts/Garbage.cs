@@ -31,7 +31,7 @@ public class Garbage : MonoBehaviour, IPooledObject
         if (lifeTimeCounter <= 0)
         {
             garbageManager.RemoveFromList(position);
-            Destroy(gameObject);//to change to a object pool system
+            //Destroy(gameObject);//to change to a object pool system
         }
     }
 }
