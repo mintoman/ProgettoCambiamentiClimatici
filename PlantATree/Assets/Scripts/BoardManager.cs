@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class BoardManager : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class BoardManager : MonoBehaviour
 
     private void CheckBoard()
     {
+        int countGoodTerrainTile = 0;
         for (int index = 0; index < gridPositions.Count; index++)
         {
             Vector3 pos = gridPositions[index];
@@ -55,6 +57,7 @@ public class BoardManager : MonoBehaviour
                 switch (data.type)
                 {
                     case "green":
+                        countGoodTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.growingChance)
                         {
                             tilemap.SetTile(gridPosition, flowerTile);
@@ -65,12 +68,14 @@ public class BoardManager : MonoBehaviour
                         }
                         break;
                     case "flower":
+                        countGoodTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.erosionChance)
                         {
                             tilemap.SetTile(gridPosition, greenTile);
                         }
                         break;
                     case "brown":
+                        countGoodTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.erosionChance)
                         {
                             //start a fire
@@ -81,6 +86,11 @@ public class BoardManager : MonoBehaviour
                         break;
                 }    
             }
+        }
+
+        if (countGoodTerrainTile <= 45)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -119,9 +129,10 @@ public class BoardManager : MonoBehaviour
     {
         //Clear our list gridPositions.
         gridPositions.Clear();
-        
+
         //Loop through x axis (columns).
         for (int x = -9; x < -9 + tilemap.size.x - 1; x++)
+        //for (int x = -9; x < -9*2; x++)
         {
             //Within each column, loop through y axis (rows).
             for (int y = -5; y <= -5 + tilemap.size.y - 4; y++)
@@ -133,7 +144,8 @@ public class BoardManager : MonoBehaviour
                 tilemap.SetTile(tilePos, greenTile);
                 //Debug.Log(new Vector3(x, y, 0f));
             }
-        }  
+        }
+        Debug.Log("tilemap.size.x " + tilemap.size.x+ " tilemap.size.y " + tilemap.size.y);
     }
 
     void LayoutTilesAtRandom(Dictionary<Vector3Int, float> tiles, TileBase newtile, int minimum, int maximum)
