@@ -86,8 +86,7 @@ public class GridMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D) && !isMoving)
         {
             StartCoroutine(MovePlayer(Vector3.right));
-        }*/
-            
+        }*/    
 
         plantSeedTimer += Time.deltaTime;
         
