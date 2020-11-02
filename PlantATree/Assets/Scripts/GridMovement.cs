@@ -6,10 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class GridMovement : MonoBehaviour
 {
-    public Tilemap tilemap;
-
     public BoardManager boardManager;
-
+    
     private bool isMoving;
     //public float timeToMove = 0.25f;
 
@@ -46,7 +44,7 @@ public class GridMovement : MonoBehaviour
         //Movement
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMoving)
         {
-            if (plantSeedTimer >= plantSeedRate)
+            if (plantSeedTimer >= plantSeedRate && boardManager.GetTileDataIsWalkable(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f)))
             {
                 movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                 animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
@@ -57,7 +55,7 @@ public class GridMovement : MonoBehaviour
         }
         else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f && !isMoving)
         {
-            if (plantSeedTimer >= plantSeedRate)
+            if (plantSeedTimer >= plantSeedRate && boardManager.GetTileDataIsWalkable(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f)))
             {
                 movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
                 animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));

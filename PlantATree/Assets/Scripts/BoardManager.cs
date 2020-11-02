@@ -14,6 +14,7 @@ public class BoardManager : MonoBehaviour
     private List<Vector3> gridPositions = new List<Vector3>();    //A list of possible locations to place tiles.
 
     public Tilemap tilemap;
+    public Tilemap collisionMap;
 
     public TileBase flowerTile;
     public TileBase greenTile;
@@ -221,6 +222,18 @@ public class BoardManager : MonoBehaviour
             return null;
         else
             return dataFromTiles[tile];
+    }
+
+    public bool GetTileDataIsWalkable(Vector3 worldPosition)
+    {
+        Vector3Int gridPosition = collisionMap.WorldToCell(worldPosition);
+
+        TileBase tile = collisionMap.GetTile(gridPosition);
+
+        if (tile == null)
+            return true;
+        else
+            return dataFromTiles[tile].isWalkable;
     }
 
     public void SetGreenTileData(Vector3 position)

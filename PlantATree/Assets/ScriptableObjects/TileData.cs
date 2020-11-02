@@ -10,6 +10,8 @@ public class TileData : ScriptableObject
 
     public string type = "";
 
+    public bool isWalkable = false;
+
     public bool canBurn;
 
     public bool canGrow;
