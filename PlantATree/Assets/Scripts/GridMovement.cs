@@ -16,8 +16,8 @@ public class GridMovement : MonoBehaviour
     public float timeToMove = 0.25f;
 
     [SerializeField]
-    private float refireRate = 2f;
-    private float fireTimer = 0;
+    private float plantSeedRate = 1f;
+    private float plantSeedTimer = 0;
 
     public Animator animator;
 
@@ -26,6 +26,7 @@ public class GridMovement : MonoBehaviour
 
     void Start()
     {
+        animator.SetBool("isPlantingSeed", false);
         movePoint.parent = null;
     }
 
@@ -39,10 +40,13 @@ public class GridMovement : MonoBehaviour
             animator.SetBool("isMoving", false);
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
+                if (plantSeedTimer >= plantSeedRate)
+                {
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                    animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
 
-                animator.SetBool("isMoving", true);
+                    animator.SetBool("isMoving", true);
+                }
             }
             else
             {
@@ -51,10 +55,13 @@ public class GridMovement : MonoBehaviour
 
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
-                movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-                animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
+                if (plantSeedTimer >= plantSeedRate)
+                {
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                    animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
 
-                animator.SetBool("isMoving", true);
+                    animator.SetBool("isMoving", true);
+                }
             }
             else
             {
@@ -82,16 +89,22 @@ public class GridMovement : MonoBehaviour
         }*/
             
 
-        fireTimer += Time.deltaTime;
-
+        plantSeedTimer += Time.deltaTime;
+        
         if (Input.GetKey(KeyCode.K) && !isMoving && boardManager.GetTileData(transform.position).type == "brown")
         {
-            if (fireTimer >= refireRate)
+            if (plantSeedTimer >= plantSeedRate)
             {
-                fireTimer = 0;
+                plantSeedTimer = 0;
                 PlantSeed();
             }
-        }      
+        }
+        else
+        {
+            if (plantSeedTimer >= plantSeedRate)
+                animator.SetBool("isPlantingSeed", false);
+        }
+       
     }
 
     void FixedUpdate()
@@ -123,7 +136,8 @@ public class GridMovement : MonoBehaviour
 
     private void PlantSeed()
     {
-        print("SEME");
+        animator.SetBool("isPlantingSeed", true);
+        //print("SEME");
         boardManager.SetGreenTileData(transform.position);
     }
 }
