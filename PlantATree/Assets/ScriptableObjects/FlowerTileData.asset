@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlowerTileData
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 5259d63d41a5946778f5637308ca4191, type: 2}
+  - {fileID: 11400000, guid: 9f748039eafff4eab9ecdd04e42aaa08, type: 2}
   type: flower
   canBurn: 1
   canGrow: 0

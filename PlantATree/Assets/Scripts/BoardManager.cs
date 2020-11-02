@@ -31,8 +31,6 @@ public class BoardManager : MonoBehaviour
     private List<Vector3> gridPositions = new List<Vector3>();    //A list of possible locations to place tiles.
 
     public Tilemap tilemap;
-    public GameObject seed;
-    public GameObject garbage;
 
     public TileBase flowerTile;
     public TileBase greenTile;
@@ -40,8 +38,8 @@ public class BoardManager : MonoBehaviour
     public TileBase blackTile;
 
     //private Dictionary<Vector3Int, float> erodedTiles = new Dictionary<Vector3Int, float>();
-    private Dictionary<Vector3Int, float> flowerTiles = new Dictionary<Vector3Int, float>();
-    private Dictionary<Vector3Int, float> brownTiles = new Dictionary<Vector3Int, float>();
+    //private Dictionary<Vector3Int, float> flowerTiles = new Dictionary<Vector3Int, float>();
+    //private Dictionary<Vector3Int, float> brownTiles = new Dictionary<Vector3Int, float>();
 
     [SerializeField]
     private List<TileData> tileDatas;
@@ -119,6 +117,7 @@ public class BoardManager : MonoBehaviour
         {
             foreach (var tile in tileData.tiles)
             {
+                print("adding to dictionary: "+ tileData.type);
                 dataFromTiles.Add(tile, tileData);//the tile will be the key the tileData the value
             }
         }

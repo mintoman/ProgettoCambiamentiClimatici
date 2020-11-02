@@ -19,20 +19,60 @@ public class GridMovement : MonoBehaviour
     private float refireRate = 2f;
     private float fireTimer = 0;
 
+    public Animator animator;
+
+    public float moveSpeed = 5f;
+    public Transform movePoint;
+
+    void Start()
+    {
+        movePoint.parent = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) && !isMoving)
+        
+
+        if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
+        {
+            animator.SetBool("isMoving", false);
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            {
+                movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
+
+                animator.SetBool("isMoving", true);
+            }
+
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            {
+                movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
+
+                animator.SetBool("isMoving", true);
+            }
+        }
+        
+
+        //old move code
+        /*if (Input.GetKey(KeyCode.W) && !isMoving)
+        {
             StartCoroutine(MovePlayer(Vector3.up));
-
+        }
         else if (Input.GetKey(KeyCode.A) && !isMoving)
+        {
             StartCoroutine(MovePlayer(Vector3.left));
-
+        }
         else if (Input.GetKey(KeyCode.S) && !isMoving)
+        {
             StartCoroutine(MovePlayer(Vector3.down));
-
+        }
         else if (Input.GetKey(KeyCode.D) && !isMoving)
+        {
             StartCoroutine(MovePlayer(Vector3.right));
+        }*/
+            
 
         fireTimer += Time.deltaTime;
 
@@ -43,8 +83,12 @@ public class GridMovement : MonoBehaviour
                 fireTimer = 0;
                 PlantSeed();
             }
-        }
-            
+        }      
+    }
+
+    void FixedUpdate()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
     }
    
     private IEnumerator MovePlayer(Vector3 direction)
@@ -60,8 +104,6 @@ public class GridMovement : MonoBehaviour
         {
             transform.position = Vector3.Lerp(originPos, targetPos, (elapsedTime / timeToMove));
 
-           UpdateMapPosition();
-
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -69,16 +111,6 @@ public class GridMovement : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
-    }
-
-    private void UpdateMapPosition()
-    {
-        //this.GetTileData(transform.position);
-    }
-
-    private void GetTileData(Vector3 position)
-    {
-        //print("can burn:"+boardManager.GetTileData(position).canBurn);
     }
 
     private void PlantSeed()
