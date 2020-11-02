@@ -17,7 +17,8 @@ public class Fire : MonoBehaviour, IPooledObject
         {
             fireManager.FinishedBurning(position);
             //Destroy(gameObject);//to change to a object pool system
-            gameObject.SetActive(false);
+
+            //gameObject.SetActive(false);
         }
 
         spreadIntervalCounter -= Time.deltaTime;

@@ -57,7 +57,7 @@ public class GarbageManager : MonoBehaviour
             if (tile != null)
                 tiletype = boardManager.dataFromTiles[tile].type;
 
-        } while (tiletype == "brown" || tiletype == "black");
+        } while (tiletype == "brown" || tiletype == "black" || tile == null);
 
         CreateGarbage(pos, tilePos);
     }

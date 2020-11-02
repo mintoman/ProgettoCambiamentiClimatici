@@ -156,7 +156,7 @@ MonoBehaviour:
   blackTile: {fileID: 11400000, guid: 01cbadb5eba2842a0bca5cc9754f2d15, type: 2}
   brownTile: {fileID: 11400000, guid: 0dde9d772f9454f7f988d1a2dedcb656, type: 2}
   boardManager: {fileID: 666983541}
-  firePrefab: {fileID: 8996097993878421197, guid: f60aac368d5bf46cbb7decea8ac5587f, type: 3}
+  firePrefab: {fileID: 7107765033338928208, guid: f60aac368d5bf46cbb7decea8ac5587f, type: 3}
 --- !u!4 &144300897
 Transform:
   m_ObjectHideFlags: 0
@@ -983,7 +983,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.1007004
+  orthographic size: 5.64
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3202,10 +3202,10 @@ MonoBehaviour:
   pools:
   - tag: Garbage
     prefab: {fileID: 9202569844476714677, guid: 9b70ed52f1b6c41deae63dd4b73323f5, type: 3}
-    size: 50
+    size: 10
   - tag: Fire
-    prefab: {fileID: 5990946043504900981, guid: f60aac368d5bf46cbb7decea8ac5587f, type: 3}
-    size: 50
+    prefab: {fileID: 7107765033338928211, guid: f60aac368d5bf46cbb7decea8ac5587f, type: 3}
+    size: 180
 --- !u!1 &1978361104
 GameObject:
   m_ObjectHideFlags: 0
