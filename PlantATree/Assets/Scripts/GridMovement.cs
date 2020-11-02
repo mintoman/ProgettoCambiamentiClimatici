@@ -33,39 +33,36 @@ public class GridMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
         {
+            isMoving = false;
             animator.SetBool("isMoving", false);
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            animator.SetFloat("Horizontal", 0f);
+            animator.SetFloat("Vertical", 0f);
+        }
+            
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMoving)
+        {
+            if (plantSeedTimer >= plantSeedRate)
             {
-                if (plantSeedTimer >= plantSeedRate)
-                {
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                    animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
+                movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
 
-                    animator.SetBool("isMoving", true);
-                }
+                animator.SetBool("isMoving", true);
+                isMoving = true;
             }
-            else
+        }
+        else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f && !isMoving)
+        {
+            if (plantSeedTimer >= plantSeedRate)
             {
-                animator.SetFloat("Horizontal", 0f);
-            }
+                movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
 
-            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
-            {
-                if (plantSeedTimer >= plantSeedRate)
-                {
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-                    animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
-
-                    animator.SetBool("isMoving", true);
-                }
-            }
-            else
-            {
-                animator.SetFloat("Vertical", 0f);
+                animator.SetBool("isMoving", true);
+                isMoving = true;
             }
         }
         
