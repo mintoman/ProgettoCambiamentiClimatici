@@ -224,7 +224,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.1007023
+  orthographic size: 5.1007004
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -376,12 +376,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 12
   rows: 10
-  flowerCount:
-    minimum: 5
-    maximum: 10
-  brownCount:
-    minimum: 1
-    maximum: 3
   tilemap: {fileID: 769739001}
   flowerTile: {fileID: 11400000, guid: 9f748039eafff4eab9ecdd04e42aaa08, type: 2}
   greenTile: {fileID: 11400000, guid: 14d9994e03a3e4716ac9b7d660aa5c64, type: 2}
@@ -392,7 +386,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97e3e634274dc480e82c5f72093bd11f, type: 2}
   - {fileID: 11400000, guid: 378d450c48ad340c8b18587eda891356, type: 2}
   - {fileID: 11400000, guid: 9a8331ca26fe7409a87cc204a4d9b06e, type: 2}
-  timeBetweenWaves: 1
+  timeBetweenWaves: 3
   fireManager: {fileID: 144300896}
 --- !u!4 &666983542
 Transform:
