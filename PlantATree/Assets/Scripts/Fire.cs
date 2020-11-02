@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Fire : MonoBehaviour, IPooledObject
 {
     private Vector3Int position;
     private TileData data;
@@ -10,23 +10,14 @@ public class Fire : MonoBehaviour
 
     private float burnTimeCounter, spreadIntervalCounter;
 
-    public void StartBurning(Vector3Int position, TileData data, FireManager fm)
-    {
-        this.position = position;
-        this.data = data;
-        fireManager = fm;
-
-        burnTimeCounter = data.burnTime;
-        spreadIntervalCounter = data.spreadInterval;
-    }
-
     private void Update()
     {
         burnTimeCounter -= Time.deltaTime;
         if (burnTimeCounter <= 0)
         {
             fireManager.FinishedBurning(position);
-            Destroy(gameObject);//to change to a object pool system
+            //Destroy(gameObject);//to change to a object pool system
+            gameObject.SetActive(false);
         }
 
         spreadIntervalCounter -= Time.deltaTime;
@@ -35,5 +26,20 @@ public class Fire : MonoBehaviour
             spreadIntervalCounter = data.spreadInterval;
             fireManager.TryToSpread(position, data.spreadChance);
         }
+    }
+
+    void IPooledObject.OnObjectSpawnBurn(Vector3Int tilePosition, TileData data, FireManager fm)
+    {
+        this.position = tilePosition;
+        this.data = data;
+        fireManager = fm;
+
+        burnTimeCounter = data.burnTime;
+        spreadIntervalCounter = data.spreadInterval;
+    }
+
+    void IPooledObject.OnObjectSpawn(Vector3Int position, GarbageManager gm)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -30,8 +30,14 @@ public class Garbage : MonoBehaviour, IPooledObject
         lifeTimeCounter -= Time.deltaTime;
         if (lifeTimeCounter <= 0)
         {
+            gameObject.SetActive(false);
             garbageManager.RemoveFromList(position);
             //Destroy(gameObject);//to change to a object pool system
         }
+    }
+
+    void IPooledObject.OnObjectSpawnBurn(Vector3Int tilePosition, TileData data, FireManager fm)
+    {
+        throw new System.NotImplementedException();
     }
 }

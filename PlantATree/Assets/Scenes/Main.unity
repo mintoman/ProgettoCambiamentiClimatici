@@ -2448,6 +2448,9 @@ MonoBehaviour:
   - tag: Garbage
     prefab: {fileID: 9202569844476714677, guid: 9b70ed52f1b6c41deae63dd4b73323f5, type: 3}
     size: 50
+  - tag: Fire
+    prefab: {fileID: 5990946043504900981, guid: f60aac368d5bf46cbb7decea8ac5587f, type: 3}
+    size: 50
 --- !u!1 &1978361104
 GameObject:
   m_ObjectHideFlags: 0
