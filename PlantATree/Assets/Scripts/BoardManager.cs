@@ -101,10 +101,7 @@ public class BoardManager : MonoBehaviour
                         break;
                     case "black":
                         break;
-                }
-                    
-
-                
+                }    
             }
         }
     }
@@ -144,11 +141,9 @@ public class BoardManager : MonoBehaviour
     {
         //Clear our list gridPositions.
         gridPositions.Clear();
-
-        Debug.Log("row: "+(-9 + tilemap.size.x - 1));
-        Debug.Log("column: " + (-5 + tilemap.size.y - 4));
+        
         //Loop through x axis (columns).
-        for (int x = -9; x <= -9 + tilemap.size.x - 1; x++)
+        for (int x = -9; x < -9 + tilemap.size.x - 1; x++)
         {
             //Within each column, loop through y axis (rows).
             for (int y = -5; y <= -5 + tilemap.size.y - 4; y++)
@@ -184,12 +179,6 @@ public class BoardManager : MonoBehaviour
 
             tiles.Add(tilePos, 1f);
             tilemap.SetTile(tilePos, newtile);
-
-            //Choose a random tile from tileArray and assign it to tileChoice
-            //GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-
-            //Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
-            //Instantiate(tileChoice, randomPosition, Quaternion.identity);
         }
     }
 
@@ -201,23 +190,6 @@ public class BoardManager : MonoBehaviour
 
         //Reset our list of gridpositions.
         InitialiseList();
-
-        //Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-        //LayoutTilesAtRandom(flowerTiles, flowerTile, flowerCount.minimum, flowerCount.maximum);
-
-        //LayoutTilesAtRandom(brownTiles, brownTile, brownCount.minimum, brownCount.maximum);
-
-        //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-        //LayoutObjectAtRandom(foodTiles, garbageCount.minimum, garbageCount.maximum);
-
-        //Determine number of enemies based on current level number, based on a logarithmic progression
-        //int enemyCount = (int)Mathf.Log(level, 2f);
-
-        //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        //LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
-
-        //Instantiate the exit tile in the upper right hand corner of our game board
-        //Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
     }
 
     private void Start()
