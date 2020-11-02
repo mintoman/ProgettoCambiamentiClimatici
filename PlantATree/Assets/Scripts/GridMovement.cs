@@ -44,6 +44,10 @@ public class GridMovement : MonoBehaviour
 
                 animator.SetBool("isMoving", true);
             }
+            else
+            {
+                animator.SetFloat("Horizontal", 0f);
+            }
 
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
@@ -51,6 +55,10 @@ public class GridMovement : MonoBehaviour
                 animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
 
                 animator.SetBool("isMoving", true);
+            }
+            else
+            {
+                animator.SetFloat("Vertical", 0f);
             }
         }
         
