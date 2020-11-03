@@ -32,7 +32,7 @@ public class GarbageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= timeToSpawn)
+        if (Time.time >= timeToSpawn && boardManager.countGreenTerrainTile > 0)
         {
             SpawnGarbage();
             timeToSpawn = Time.time + timeBetweenWaves;

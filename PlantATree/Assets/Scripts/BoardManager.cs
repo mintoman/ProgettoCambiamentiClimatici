@@ -32,6 +32,12 @@ public class BoardManager : MonoBehaviour
     [SerializeField]
     private FireManager fireManager;
 
+    public HealthBar healthBar;
+
+    public int maxTerrain = 190;
+    public int currentTerrain = 190;
+    public int countGreenTerrainTile = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -44,7 +50,7 @@ public class BoardManager : MonoBehaviour
 
     private void CheckBoard()
     {
-        int countGoodTerrainTile = 0;
+        countGreenTerrainTile = 0;
         for (int index = 0; index < gridPositions.Count; index++)
         {
             Vector3 pos = gridPositions[index];
@@ -58,7 +64,7 @@ public class BoardManager : MonoBehaviour
                 switch (data.type)
                 {
                     case "green":
-                        countGoodTerrainTile++;
+                        countGreenTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.growingChance)
                         {
                             tilemap.SetTile(gridPosition, flowerTile);
@@ -69,14 +75,13 @@ public class BoardManager : MonoBehaviour
                         }
                         break;
                     case "flower":
-                        countGoodTerrainTile++;
+                        countGreenTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.erosionChance)
                         {
                             tilemap.SetTile(gridPosition, greenTile);
                         }
                         break;
                     case "brown":
-                        countGoodTerrainTile++;
                         if (Random.Range(0f, 100f) <= data.erosionChance)
                         {
                             //start a fire
@@ -85,11 +90,14 @@ public class BoardManager : MonoBehaviour
                         break;
                     case "black":
                         break;
-                }    
+                }
             }
         }
 
-        if (countGoodTerrainTile <= 45)
+        currentTerrain = countGreenTerrainTile;
+        healthBar.SetHealth(currentTerrain);
+
+        if (countGreenTerrainTile <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -98,6 +106,7 @@ public class BoardManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
         dataFromTiles = new Dictionary<TileBase, TileData>();
         foreach (var tileData in tileDatas)
         {
@@ -131,6 +140,24 @@ public class BoardManager : MonoBehaviour
         //Clear our list gridPositions.
         gridPositions.Clear();
 
+        BoundsInt size = tilemap.cellBounds;
+        TileBase[] allTiles = tilemap.GetTilesBlock(size);
+
+
+        /*int colNumbers = size.yMax - size.yMin;
+        int rowNumbers = size.xMax - size.xMin;
+
+        Debug.Log("colNumbers: " + colNumbers + " rowNumbers: " + rowNumbers);
+
+        for (int col = size.xMin; col < size.xMax ; col++)
+        {
+            for (int row = size.yMin; row < size.yMax - 2; row++)
+            {
+                //Debug.Log(new Vector3(row, col, 0f));
+            }
+        }*/
+
+        //hardcoded values to create our map
         //Loop through x axis (columns).
         for (int x = -9; x < -9 + tilemap.size.x - 1; x++)
         //for (int x = -9; x < -9*2; x++)
@@ -146,7 +173,7 @@ public class BoardManager : MonoBehaviour
                 //Debug.Log(new Vector3(x, y, 0f));
             }
         }
-        Debug.Log("tilemap.size.x " + tilemap.size.x+ " tilemap.size.y " + tilemap.size.y);
+        //Debug.Log("tilemap.size.x " + tilemap.size.x+ " tilemap.size.y " + tilemap.size.y);
     }
 
     void LayoutTilesAtRandom(Dictionary<Vector3Int, float> tiles, TileBase newtile, int minimum, int maximum)
@@ -178,7 +205,8 @@ public class BoardManager : MonoBehaviour
     {
         //Creates the outer walls and floor.
         //BoardSetup();
-
+        currentTerrain = maxTerrain;
+        healthBar.setMaxHealth(maxTerrain);
         //Reset our list of gridpositions.
         InitialiseList();
     }
