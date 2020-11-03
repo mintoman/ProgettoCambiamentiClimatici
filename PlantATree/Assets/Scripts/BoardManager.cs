@@ -96,7 +96,6 @@ public class BoardManager : MonoBehaviour
 
         currentTerrain = countGreenTerrainTile;
         healthBar.SetHealth(currentTerrain);
-
         if (countGreenTerrainTile <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -14,7 +14,7 @@ public class Garbage : MonoBehaviour, IPooledObject
     {
         this.position = position;
         garbageManager = gm;
-        lifeTimeCounter = 2f;
+        lifeTimeCounter = 5f;
     }
 
     public void SetOnMap(Vector3Int position, GarbageManager gm)
