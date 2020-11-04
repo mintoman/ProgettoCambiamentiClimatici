@@ -32,6 +32,7 @@ public class GarbageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.state != GameManager.STATE.Play) return;
         if (Time.time >= timeToSpawn && boardManager.countGreenTerrainTile > 0)
         {
             SpawnGarbage();

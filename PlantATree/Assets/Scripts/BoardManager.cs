@@ -38,9 +38,13 @@ public class BoardManager : MonoBehaviour
     public int currentTerrain = 190;
     public int countGreenTerrainTile = 0;
 
+    //public GameManager gameManager;
+
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.state != GameManager.STATE.Play) return;
+
         if (Time.time >= timeToSpawn)
         {
             CheckBoard();
@@ -96,9 +100,10 @@ public class BoardManager : MonoBehaviour
 
         currentTerrain = countGreenTerrainTile;
         healthBar.SetHealth(currentTerrain);
-        if (countGreenTerrainTile <= 0)
+        if (countGreenTerrainTile <= 3)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.OnGameOver();
         }
     }
 
@@ -210,10 +215,15 @@ public class BoardManager : MonoBehaviour
         InitialiseList();
     }
 
+    public void SetupBoard()
+    {
+        SetupScene(0);
+    }
+
     private void Start()
     {
         
-        SetupScene(0);
+        
         //print("tilemap bounds: " + tilemap.size);
     }
 
