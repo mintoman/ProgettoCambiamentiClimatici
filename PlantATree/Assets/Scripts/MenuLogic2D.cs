@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MenuLogic2D : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class MenuLogic2D : MonoBehaviour
     public GameObject inGameScreenPanel;
 
     public GameObject gameOverScreenPanel;
-    //public TextMeshProUGUI gameOverScore;
+    public TextMeshProUGUI bestScore;
+    public TextMeshProUGUI gameOverScore;
 
     void Awake()
     {
@@ -48,10 +50,15 @@ public class MenuLogic2D : MonoBehaviour
         //this.GameUpdate ();
     }
 
-    
+
     public void SetGameOverScore(int score)
     {
+
+        TimeSpan result = TimeSpan.FromMinutes(score);
+        string fromTimeString = result.ToString("hh':'mm");
+
         //gameOverScore.SetText("{0}", score);
+        gameOverScore.SetText(fromTimeString, score);
     }
 
     /*

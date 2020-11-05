@@ -50,6 +50,13 @@ public class GameManager : MonoBehaviour
         {
             this.state = STATE.GameOver;
             MenuLogic2D.Instance.GameOverShow();
+            int score = Mathf.FloorToInt(Time.timeSinceLevelLoad);
+            MenuLogic2D.Instance.SetGameOverScore(score);
+
+            if (score > GetBestScore())
+            {
+                SaveBestScore(score);
+            }
         }
     }
 
@@ -65,5 +72,15 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public int GetBestScore()
+    {
+        return PlayerPrefs.GetInt("BESTSCORE", 0);
+    }
+
+    public void SaveBestScore(int __score)
+    {
+        PlayerPrefs.SetInt("BESTSCORE", __score);
     }
 }
