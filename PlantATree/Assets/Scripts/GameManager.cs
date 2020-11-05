@@ -60,6 +60,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void BackToMain()
+    {
+        if (this.state == STATE.GameOver)
+        {
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
     public void Restart()
     {
         if (this.state == STATE.GameOver)

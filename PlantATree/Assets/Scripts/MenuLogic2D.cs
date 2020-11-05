@@ -55,6 +55,7 @@ public class MenuLogic2D : MonoBehaviour
     {
 
         TimeSpan result = TimeSpan.FromMinutes(score);
+
         string fromTimeString = result.ToString("hh':'mm");
 
         //gameOverScore.SetText("{0}", score);
