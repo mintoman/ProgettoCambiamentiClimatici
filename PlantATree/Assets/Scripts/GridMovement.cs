@@ -21,6 +21,7 @@ public class GridMovement : MonoBehaviour
     public Transform movePoint;
 
     private bool isPlanting;
+    public AudioSource hitTile;
 
     void Start()
     {
@@ -102,5 +103,6 @@ public class GridMovement : MonoBehaviour
     {
         isPlanting = true;
         animator.SetBool("isPlantingSeed", isPlanting);
+        MusicManager.Instance.PlaySingle(hitTile.clip);
     }
 }

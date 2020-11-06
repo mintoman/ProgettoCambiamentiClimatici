@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public AudioSource collect;
+
     void OnTriggerEnter2D(Collider2D coll)
     {
         
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
 
             //garbageManager.RemoveFromList(position);
 
+            MusicManager.Instance.PlaySingle(collect.clip);
             coll.gameObject.SetActive(false);
             // Remove the Garbage
             //Destroy(coll.gameObject);

@@ -10,11 +10,15 @@ public class Garbage : MonoBehaviour, IPooledObject
 
     private Vector3Int position;
 
+    public AudioSource noise;
+
     public void OnObjectSpawn(Vector3Int position, GarbageManager gm)
     {
         this.position = position;
         garbageManager = gm;
         lifeTimeCounter = 5f;
+
+        MusicManager.Instance.PlaySingle(noise.clip);
     }
 
     public void SetOnMap(Vector3Int position, GarbageManager gm)
