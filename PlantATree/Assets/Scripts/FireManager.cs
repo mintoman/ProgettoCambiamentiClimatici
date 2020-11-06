@@ -50,8 +50,8 @@ public class FireManager : MonoBehaviour
                 if (UnityEngine.Random.Range(0f, 100f) <= data.spreadChance)
                 {
 
-                    SetTileOnFire(tilePosition, data);
-                    //map.SetTile(tilePosition, brownTile);
+                    //SetTileOnFire(tilePosition, data);
+                    map.SetTile(tilePosition, brownTile);
                 }
                     
             }
